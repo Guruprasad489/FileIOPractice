@@ -1,4 +1,15 @@
 <?xml version="1.0"?>
-<OrderForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <OrderDate>2015-12-31T00:00:00</OrderDate>
-</OrderForm>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <FName>Guru</FName>
+    <LName>Kumbar</LName>
+    <Address>BLR</Address>
+    <ZipCode>123456</ZipCode>
+  </Student>
+  <Student>
+    <FName>ABCD</FName>
+    <LName>XYZZZ</LName>
+    <Address>CKD</Address>
+    <ZipCode>102102</ZipCode>
+  </Student>
+</ArrayOfStudent>

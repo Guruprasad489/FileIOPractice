@@ -5,36 +5,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static FileIOPractice.JSonDataFormat.JsonIODataOperations;
 
 namespace FileIOPractice.XMLDataFormat
 {
     public class XMLdataOperations
     {
-        public static string XmlFilePath = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\XMLDataFormat\XMLData.XML";
-
-        public static void XMLSerialize()
+        public static void XMLSerialize(string path, List<Student> students)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(OrderForm));
-            FileStream stream = new FileStream(XmlFilePath, FileMode.Create);
-            OrderForm orderForm = new OrderForm();
-            DateTime dateTime = new DateTime(2015, 12, 31);
-            orderForm.OrderDate = dateTime;
-            ser.Serialize(stream, orderForm);
-            Console.WriteLine("XML Serialize competed");
+            XmlSerializer xml = new XmlSerializer(typeof(List<Student>));
+            FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+            xml.Serialize(stream, students);
+            Console.WriteLine("\nXML Serialize completed");
             stream.Close();
         }
-
-        public static void XMLDeSerialize()
+        public static List<Student> XMLDeSerialize(string path)
         {
-            string xml = File.ReadAllText(XmlFilePath);
-
-
-            Console.WriteLine("XML DeSerialize competed");
+            XmlSerializer xml = new XmlSerializer(typeof(List<Student>));
+            FileStream stream = new FileStream(path,FileMode.Open);
+            List<Student> st =(List<Student>)xml.Deserialize(stream);
+            Console.WriteLine("\nXML DeSerialize completed");
+            foreach (Student pn in st)
+            {
+                Console.WriteLine(pn.Tostring());
+            }
+            stream.Close();
+            return st;
         }
-    }
-
-    public class OrderForm
-    {
-        public DateTime OrderDate; 
     }
 }

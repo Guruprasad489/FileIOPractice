@@ -10,36 +10,26 @@ namespace FileIOPractice.JSonDataFormat
 {
     public class JsonIODataOperations
     {
-        public static string jsonFilePath = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\JSonDataFormat\JsonData.json";
-
-        public static void JsonSerialize()
+        public static void JsonSerialize(string path, List<Student> students)
         {
-            List<Student> students = new List<Student>() 
-            {
-                new Student { FName = "Guru", LName = "Kumbar", Address = "BLR", ZipCode = 123456 },
-                new Student { FName = "ABCD", LName = "XYZZZ", Address = "CKD", ZipCode = 102102 }
-            };
-            
             //Converting object to JSON string format
             string jSonData = JsonConvert.SerializeObject(students);      
-            File.WriteAllText(jsonFilePath, jSonData);
-            Console.WriteLine("\nJson Serialize competed");
+            File.WriteAllText(path, jSonData);
+            Console.WriteLine("\nJson Serialize completed");
         }
-
-        public static void JsonDeSerialize()
+        public static List<Student> JsonDeSerialize(string path)
         {
-            string json = File.ReadAllText(jsonFilePath);
-
+            string json = File.ReadAllText(path);
             //Converting JSON string format to list of objects
             List<Student> list = JsonConvert.DeserializeObject<List<Student>>(json);
-            Console.WriteLine("\nJson DeSerialize competed");
+            Console.WriteLine("\nJson DeSerialize completed");
             foreach (var st in list)
             {
-                Console.WriteLine(st.FName +" "+ st.LName +" "+ st.Address +" "+ st.ZipCode);
+                Console.WriteLine(st.Tostring());
             }
+            return list;
         }
-
-        class Student
+        public class Student
         {
             public string FName { get; set; }
             public string LName { get; set; }

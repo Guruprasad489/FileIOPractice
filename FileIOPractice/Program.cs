@@ -7,6 +7,8 @@ using System.IO;
 using FileIOPractice.BinaryDataFormat;
 using FileIOPractice.JSonDataFormat;
 using FileIOPractice.XMLDataFormat;
+using FileIOPractice.CsvDataFormat;
+using static FileIOPractice.JSonDataFormat.JsonIODataOperations;
 
 namespace FileIOPractice
 {
@@ -15,25 +17,65 @@ namespace FileIOPractice
         static void Main(string[] args)
         {
             string path = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\Files\Sample.txt";
-            //ReadLineByLine(path);
-            //ReadAtOnce(path);
-            //FileCopy(path);
-            //FileDelete();
-            //ReadDataUsingStreamReader(path);
-            //WriteDataUsingStreamReader(path);
-
-            Console.WriteLine("\nBinary IO Data Operations");
-            BinaryIODataOperations.BinarySerialize();
-            BinaryIODataOperations.BinaryDeSerialize();
-
-            Console.WriteLine("\nJson IO Data Operations");
-            JsonIODataOperations.JsonSerialize();
-            JsonIODataOperations.JsonDeSerialize();
-
-            Console.WriteLine("\nXML IO Data Operations");
-            XMLdataOperations.XMLSerialize();
-            
-            Console.ReadLine();
+            List<Student> students = new List<Student>()
+            {
+                new Student() { FName = "Guru", LName = "Kumbar", Address = "BLR", ZipCode = 123456 },
+                new Student() { FName = "ABCD", LName = "XYZZZ", Address = "CKD", ZipCode = 102102 }
+            };
+            while (true)
+            {
+                Console.WriteLine("Choose option \n0. Basic operations \n1. Binary \n2. Json \n3. XML \n4. CSV \n5. JsonData From Csv \n6. CsvData From Json");
+                int input = Convert.ToInt32(Console.ReadLine());
+                switch (input)
+                {
+                    case 0:
+                        ReadLineByLine(path);
+                        ReadAtOnce(path);
+                        FileCopy(path);
+                        FileDelete();
+                        ReadDataUsingStreamReader(path);
+                        WriteDataUsingStreamReader(path);
+                        break;
+                    case 1:
+                        Console.WriteLine("\nBinary IO Data Operations");
+                        BinaryIODataOperations.BinarySerialize();
+                        BinaryIODataOperations.BinaryDeSerialize();
+                        break;
+                    case 2:
+                        Console.WriteLine("\nJson IO Data Operations");
+                        string jsonFilePath = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\JSonDataFormat\JsonData.json";
+                        JsonIODataOperations.JsonSerialize(jsonFilePath, students);
+                        JsonIODataOperations.JsonDeSerialize(jsonFilePath);
+                        break;
+                    case 3:
+                        Console.WriteLine("\nXML IO Data Operations");
+                        string xmlFilePath = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\XMLDataFormat\XMLData.xml";
+                        XMLdataOperations.XMLSerialize(xmlFilePath, students);
+                        XMLdataOperations.XMLDeSerialize(xmlFilePath);
+                        break;
+                    case 4:
+                        Console.WriteLine("\nCSV IO Data Operations");
+                        string csvFilePath = @"C:\Users\Guruprasad\source\repos\FileIOPractice\FileIOPractice\CsvDataFormat\CsvData.csv";
+                        CsvDataOperations.CsvSerialize(csvFilePath, students);
+                        CsvDataOperations.CsvDeSerialize(csvFilePath);
+                        break;
+                    case 5:
+                        Console.WriteLine("JsonData From Csv");
+                        JsonCsvDataOperations.JsonDataFromCsv();
+                        break;
+                    case 6:
+                        Console.WriteLine("CsvData From Json");
+                        JsonCsvDataOperations.CsvDataFromJson();
+                        break;
+                    case 7:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        break;
+                }
+                Console.ReadLine();
+            }
         }
 
         public static bool IsFileExist(string path)
