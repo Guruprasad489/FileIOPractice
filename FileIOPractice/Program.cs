@@ -24,7 +24,7 @@ namespace FileIOPractice
             };
             while (true)
             {
-                Console.WriteLine("Choose option \n0. Basic operations \n1. Binary \n2. Json \n3. XML \n4. CSV \n5. JsonData From Csv \n6. CsvData From Json");
+                Console.WriteLine("Choose option \n0. Basic operations \n1. Binary \n2. Json \n3. XML \n4. CSV \n5. JsonData From Csv \n6. CsvData From Json \n7. Exit");
                 int input = Convert.ToInt32(Console.ReadLine());
                 switch (input)
                 {
